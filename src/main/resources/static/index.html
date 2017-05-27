@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        function uploadFile() {
+            $.ajax({
+                url: '/upload',
+                type: 'POST',
+                cache: false,
+                data: new FormData($('#uploadForm')[0]),
+                processData: false,
+                contentType: false
+            }).done(function (res) {
+                console.log("done")
+                downloadFile();
+            }).fail(function (res) {
+                console.log("fail")
+            });
+        }
+
+        function downloadFile (){
+            var frame = $("<iframe style='display: none;'/>");
+            frame.appendTo($("body")).attr({ "src": "/download", "display": "block" });
+            setTimeout(function () {
+                frame.remove();
+            }, 3000);
+        }
+
+    </script>
+</head>
+<body>
+<form id="uploadForm" enctype="multipart/form-data">
+    <input id="file" type="file" name="file"/>
+    <button id="upload" type="button" onclick="uploadFile()">开始转换</button>
+
+</form>
+</body>
+</html>

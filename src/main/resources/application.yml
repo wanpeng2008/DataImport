@@ -1,0 +1,23 @@
+server:
+  port: 8180
+spring:
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+      dialect:  org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    platform: postgres
+    url:  jdbc:postgresql://localhost:5432/erp
+    username: erp
+    password: 123456
+    driverClassName: org.postgresql.Driver
+  http:
+    multipart:
+      max-file-size: 2000MB
+      max-request-size: 2000MB
+logging:
+  level:
+    org.springframework.web: DEBUG
+    com.github.binarywang.demo.wechat: DEBUG
